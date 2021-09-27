@@ -4,13 +4,11 @@ import mediapipe as mp
 import time
 from helper_funcs import write_to_csv, distance_calc
 
-class Hand:
-    def __init__(self, id, x, y):
-        self.id = id
-        self.x = x
-        self.y = y
+def capture_data():
+    """Captures data denoted by the motion
 
-def main():
+    Returns:
+    """
     # Setup first webcam as capture input
     cap = cv2.VideoCapture(0)
 
@@ -24,12 +22,15 @@ def main():
     cTime = 0 # Curr time
 
     counter = 0 # To count number of data to be taken 
-    data4csv = []
+    X = []
+    label = []
 
-
-    while True:
+    while True: # To gather thumbs up data
         if counter == 1000:
-            break
+            print("normal hand motion")
+
+            if input("Press enter to continue: ") == "":
+                break
 
         success, img = cap.read() # Reads image
         img = cv2.flip(img, 1)
@@ -52,8 +53,8 @@ def main():
                     cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED) 
 
                 distances = [distance_calc(temp[0], temp[4]), distance_calc(temp[0], temp[8]), distance_calc(temp[0], temp[12]), distance_calc(temp[0], temp[16]), distance_calc(temp[0], temp[20])]
-                data4csv.append(distances)
-                print(distances)
+                X.append(distances)
+                label.append(1)
 
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
@@ -63,7 +64,7 @@ def main():
         pTime = cTime
 
         cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_ITALIC, 3, (255, 0, 255), 2) # Shows fps in the window
-        cv2.putText(img, "Getting data...", (10, 130), cv2.FONT_ITALIC, 3, (0, 255, 0), 2) # Shows fps in the window
+        cv2.putText(img, "thumbs up", (10, 130), cv2.FONT_ITALIC, 3, (0, 255, 0), 2) # Shows fps in the window
 
 
         cv2.imshow("Image", img) # Opens window with webcam capture
@@ -71,9 +72,14 @@ def main():
 
         counter += 1
 
-    write_to_csv(data4csv)
+    write_to_csv(X)
 
     print("SUCCESS")
+
+    return X, label
+
+def main():
+    pass
 
 if __name__ == "__main__":
     main()
