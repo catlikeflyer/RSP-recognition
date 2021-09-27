@@ -12,25 +12,25 @@ def distance_calc(id_1, id_2) -> float:
 
     return dist
 
-def write_to_csv(data: list) -> None:
+def write_to_csv(data: list, filename: str) -> None:
     """
     Writes each data obtained from one frame of hand recognition
     to csv
 
     :Returns None
     """
-    with open("thumb_data.csv", 'w', newline="") as file:
+    with open(filename, 'w', newline="") as file:
         writer = csv.writer(file)
         writer.writerow(['thumb', 'fing1', 'fing2', 'fing3', 'fing4'])
         writer.writerows(data)
 
-def read_csv():
+def read_csv(filename: str):
     """Returns an array of data retrieved beforehand
 
     """
     x = []
 
-    with open("thumb_data.csv", 'r', newline='') as file:
+    with open(filename, 'r', newline='') as file:
         reader = csv.reader(file)
 
         for row in reader:

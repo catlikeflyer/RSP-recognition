@@ -4,7 +4,7 @@ import mediapipe as mp
 import time
 from helper_funcs import write_to_csv, distance_calc
 
-def capture_data():
+def capture_data(motion: str, label: int):
     """Captures data denoted by the motion
 
     Returns:
@@ -23,14 +23,11 @@ def capture_data():
 
     counter = 0 # To count number of data to be taken 
     X = []
-    label = []
+    labels = []
 
     while True: # To gather thumbs up data
         if counter == 1000:
-            print("normal hand motion")
-
-            if input("Press enter to continue: ") == "":
-                break
+            break
 
         success, img = cap.read() # Reads image
         img = cv2.flip(img, 1)
@@ -54,7 +51,7 @@ def capture_data():
 
                 distances = [distance_calc(temp[0], temp[4]), distance_calc(temp[0], temp[8]), distance_calc(temp[0], temp[12]), distance_calc(temp[0], temp[16]), distance_calc(temp[0], temp[20])]
                 X.append(distances)
-                label.append(1)
+                labels.append(label)
 
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
@@ -64,7 +61,7 @@ def capture_data():
         pTime = cTime
 
         cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_ITALIC, 3, (255, 0, 255), 2) # Shows fps in the window
-        cv2.putText(img, "thumbs up", (10, 130), cv2.FONT_ITALIC, 3, (0, 255, 0), 2) # Shows fps in the window
+        cv2.putText(img, motion, (10, 130), cv2.FONT_ITALIC, 3, (0, 255, 0), 2) # Shows fps in the window
 
 
         cv2.imshow("Image", img) # Opens window with webcam capture
@@ -72,11 +69,11 @@ def capture_data():
 
         counter += 1
 
-    write_to_csv(X)
+    write_to_csv(X, "data.csv")
 
     print("SUCCESS")
 
-    return X, label
+    return X, labels
 
 def main():
     pass
