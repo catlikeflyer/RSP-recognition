@@ -7,7 +7,7 @@ def distance_calc(id_1, id_2) -> float:
 
     :Returns float value
     """
-    dist = math.pow((id_1.x-id_2.x)**2 + (id_1.y-id_2.y)**2)
+    dist = math.pow((id_1["x"]-id_2["x"])**2 + (id_1["y"]-id_2["y"])**2, 0.5)
 
     return dist
 
@@ -18,8 +18,9 @@ def write_to_csv(data: list) -> None:
 
     :Returns None
     """
-    with open("thumb_data.csv", 'w', encoding="UFT8") as file:
+    with open("thumb_data.csv", 'w', newline="") as file:
         writer = csv.writer(file)
-    writer.writerow(data)
+        writer.writerow(['thumb', 'fing1', 'fing2', 'fing3', 'fing4'])
+        writer.writerows(data)
 
 
