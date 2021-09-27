@@ -3,6 +3,9 @@
 2. If ran for the first time, run [`get_data.py`](trainers/get_data.py) inside the *trainers* directory
 3. Then, run the *main* script and Vuala!
 
+## How it works
+When gathering data, the program measures the distance between the base of the hand to each fingertip, and that data is then submitted to the SVM and labeled accordingly to the SVM.
+
 ## Functionalities (not finished)
 - Recognizes hand landmarks using Mediapipe solutions
 - Gathers information about the hand gesture using the landmarks in your hand

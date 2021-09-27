@@ -25,8 +25,10 @@ def write_to_csv(data: list, filename: str) -> None:
         writer.writerows(data)
 
 def read_csv(filename: str):
-    """Returns an array of data retrieved beforehand
+    """
+    Returns an array of data retrieved beforehand
 
+    :Returns Array
     """
     x = []
 
