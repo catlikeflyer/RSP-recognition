@@ -1,8 +1,19 @@
-# Thumbs up recognition
-To install the dependencies run `pip install requirements.txt`
+# RSP Recognition
+1. To install the dependencies run `pip install -r requirements.txt` (pip3 if Mac or Linux)
+2. If ran for the first time, run [`get_data.py`](trainers/get_data.py) inside the *trainers* directory
+3. Then, run the *main* script and Vuala!
 
-# Functionalities (not finished)
+## Functionalities (not finished)
 - Recognizes hand landmarks using Mediapipe solutions
-- (na) Gathers information about the landmark positions of the thumbs up motion
-- (na) Using Scikit Learn clusters model determine if it is a thumbs up 
-- Data to be used are the distances between the base of the hand and each node in the fingertips
+- Gathers information about the hand gesture using the landmarks in your hand
+- Using the Support Vector Machine from SK-Learn it generates a prediction model
+- Based on this data it can determine if your motion is rock, paper, or scissors
+
+## Libraries used
+- Scikit Learn
+- Open CV for Python
+
+## Opportunities to strengthen the program
+- Use OOP for the repeated CV scripts
+- Implement arrays for faster runtime
+- Actually do something with the model
