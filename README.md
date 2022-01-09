@@ -1,6 +1,6 @@
 # RSP Recognition
 1. To install the dependencies run `pip install -r requirements.txt` (pip3 if Mac or Linux)
-2. If ran for the first time, run [`get_data.py`](trainers/get_data.py) inside the *trainers* directory
+2. If ran for the first time, run [`svm_model.py`](trainers/svm_model.py.py) inside the *trainers* directory
 3. Then, run the *main* script and Vuala!
 
 ## How it works
